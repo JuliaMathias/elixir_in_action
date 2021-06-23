@@ -1,0 +1,14 @@
+This lazy property of streams can become useful for consuming slow and potentially
+large enumerable input. A typical case is when you need to parse each line of a file.
+Relying on eager Enum functions means you have to read the entire file into memory
+and then iterate through each line. In contrast, using streams makes it possible to read
+and immediately parse one line at a time. For example, the following function takes a
+filename and returns the list of all lines from that file that are longer than 80 characters:
+
+Here you rely on the File.stream!/1 function, which takes the path of a file and
+returns a stream of its lines. Because the result is a stream, the iteration through the file
+happens only when you request it. After File.stream! returns, no byte from the file has
+been read yet. Then you remove the trailing newline character from each line, again in
+the lazy manner. Finally, you eagerly take only long lines, using Enum.filter/2 . It’s at
+this point that iteration happens. The consequence is that you never read the entire file
+in memory; instead, you work on each line individually.
