@@ -12,3 +12,9 @@ been read yet. Then you remove the trailing newline character from each line, ag
 the lazy manner. Finally, you eagerly take only long lines, using Enum.filter/2 . It’s at
 this point that iteration happens. The consequence is that you never read the entire file
 in memory; instead, you work on each line individually.
+
+a.
+ab.
+abc.
+abcd.
+abcde.

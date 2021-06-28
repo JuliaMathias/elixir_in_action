@@ -7,13 +7,18 @@ defmodule ElixirInAction.Streams do
   def lines_lengths!(filepath) do
     File.stream!(filepath)
     |> Stream.map(&String.replace(&1, "\n", ""))
-
-    # |> Enum.map([a: 1, b: 2], fn {k, v} -> {k, -v} end)
+    |> Stream.map_every(1, fn line -> String.length(line) end)
+    |> Enum.to_list()
   end
 
-  #   @doc "function that returns the length of the longest line in a file."
-  #   def longest_line_length!(file) do
-  #   end
+  @doc "function that returns the length of the longest line in a file."
+  def longest_line_length!(file) do
+    file
+    |> lines_lengths!()
+    |> Enum.sort()
+    |> Enum.reverse()
+    |> List.first()
+  end
 
   @doc "function that returns the contents of the longest line in a file."
   def longest_line!(filepath) do
