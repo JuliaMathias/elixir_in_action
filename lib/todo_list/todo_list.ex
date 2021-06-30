@@ -17,4 +17,10 @@ defmodule ElixirInAction.TodoList do
       fn titles -> [title | titles] end
     )
   end
+
+  @doc "Lists all to-do list entries"
+  @spec entries(map, Calendar.date()) :: list
+  def entries(todo_list, date) do
+    Map.get(todo_list, date, [])
+  end
 end
