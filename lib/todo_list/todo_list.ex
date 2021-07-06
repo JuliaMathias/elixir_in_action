@@ -1,16 +1,22 @@
-defmodule ElixirInAction.TodoList do
+defmodule ElixirInAction.TodoList.TodoList do
   @moduledoc """
   A simple to-do list
   """
 
-  @doc "Initiates a new to-do list"
+  alias ElixirInAction.TodoList.MultiDict
+
+  @doc """
+  Initiates a new to-do list
+  """
   @spec new :: %{}
   def new(), do: MultiDict.new()
 
-  @doc "Adds entry to the to-do list"
-  @spec add_entry(map, Calendar.date(), String.t()) :: map
-  def add_entry(todo_list, date, title) do
-    MultiDict.add(todo_list, date, title)
+  @doc """
+  Adds entry to the to-do list
+  """
+  @spec add_entry(map, map) :: map
+  def add_entry(todo_list, entry) do
+    MultiDict.add(todo_list, entry.date, entry)
   end
 
   @doc "Lists all to-do list entries"

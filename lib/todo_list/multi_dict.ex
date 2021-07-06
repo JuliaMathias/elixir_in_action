@@ -1,4 +1,4 @@
-defmodule MultiDict do
+defmodule ElixirInAction.TodoList.MultiDict do
   @moduledoc """
   Handles map abstractions
   """
