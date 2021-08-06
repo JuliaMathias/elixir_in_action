@@ -20,4 +20,19 @@ defmodule ElixirInAction.TodoListApp.TodoListTest do
                }
     end
   end
+
+  describe "entries/2" do
+    test "when called should return list of entries for that day" do
+      todo_list =
+        TodoList.new()
+        |> TodoList.add_entry(%{date: ~D[2018-12-19], title: "Dentist"})
+        |> TodoList.add_entry(%{date: ~D[2018-12-20], title: "Shopping"})
+        |> TodoList.add_entry(%{date: ~D[2018-12-19], title: "Movies"})
+
+      assert TodoList.entries(todo_list, ~D[2018-12-19]) == [
+               %{date: ~D[2018-12-19], id: 1, title: "Dentist"},
+               %{date: ~D[2018-12-19], id: 3, title: "Movies"}
+             ]
+    end
+  end
 end
