@@ -31,18 +31,18 @@ defmodule ElixirInAction.TodoListApp.TodoList do
     %TodoList{todo_list | entries: new_entries, auto_id: todo_list.auto_id + 1}
   end
 
-  @doc """
-  Updates entry. In case an entry doesn't exist, it doesn't do anything
-  """
-  def update_entry(todo_list, %{} = new_entry) do
-    update_entry(todo_list, new_entry.id, fn _ -> new_entry end)
-  end
-
   @doc "Lists all to-do list entries"
   def entries(todo_list, date) do
     todo_list.entries
     |> Stream.filter(fn {_, entry} -> entry.date == date end)
     |> Enum.map(fn {_, entry} -> entry end)
+  end
+
+  @doc """
+  Updates entry. In case an entry doesn't exist, it doesn't do anything
+  """
+  def update_entry(todo_list, %{} = new_entry) do
+    update_entry(todo_list, new_entry.id, fn _ -> new_entry end)
   end
 
   defp update_entry(todo_list, entry_id, updater_fun) do
