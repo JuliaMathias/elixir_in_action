@@ -35,4 +35,30 @@ defmodule ElixirInAction.TodoListApp.TodoListTest do
              ]
     end
   end
+
+  describe "update_entry/2" do
+    test "if an entry doesn't exist it shouldn't be created" do
+      todo_list =
+        TodoList.new()
+        |> TodoList.add_entry(%{date: ~D[2018-12-19], title: "Dentist"})
+
+      assert TodoList.update_entry(todo_list, %{date: ~D[2018-12-19], id: 8, title: "Doctor"}) ==
+               %ElixirInAction.TodoListApp.TodoList{
+                 auto_id: 2,
+                 entries: %{1 => %{date: ~D[2018-12-19], id: 1, title: "Dentist"}}
+               }
+    end
+
+    test "if an entry exists it should be updated" do
+      todo_list =
+        TodoList.new()
+        |> TodoList.add_entry(%{date: ~D[2018-12-19], title: "Dentist"})
+
+      assert TodoList.update_entry(todo_list, %{date: ~D[2018-12-19], id: 1, title: "Doctor"}) ==
+               %ElixirInAction.TodoListApp.TodoList{
+                 auto_id: 2,
+                 entries: %{1 => %{date: ~D[2018-12-19], id: 1, title: "Doctor"}}
+               }
+    end
+  end
 end
