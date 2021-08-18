@@ -1,4 +1,7 @@
 defmodule ElixirInAction.TodoListApp.TodoListTest do
+  @moduledoc """
+  Tests for the ElixirInAction.TodoListApp.TodoList module
+  """
   use ExUnit.Case
 
   alias ElixirInAction.TodoListApp.TodoList
