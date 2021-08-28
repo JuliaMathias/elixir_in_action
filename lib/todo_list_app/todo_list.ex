@@ -45,6 +45,19 @@ defmodule ElixirInAction.TodoListApp.TodoList do
     update_entry(todo_list, new_entry.id, fn _ -> new_entry end)
   end
 
+  def delete_entry(todo_list, entry) do
+    entries_map = Map.fetch!(todo_list, :entries)
+
+    entry_key =
+      entries_map
+      |> Enum.find(fn {_, v} -> entry.date == v.date && entry.title == v.title end)
+      |> elem(0)
+
+    new_entries = entries_map |> Map.delete(entry_key)
+
+    %TodoList{todo_list | entries: new_entries}
+  end
+
   defp update_entry(todo_list, entry_id, updater_fun) do
     case Map.fetch(todo_list.entries, entry_id) do
       :error ->
