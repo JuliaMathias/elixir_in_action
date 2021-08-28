@@ -64,4 +64,23 @@ defmodule ElixirInAction.TodoListApp.TodoListTest do
                }
     end
   end
+
+  describe "delete_entry/2" do
+    test "when given a TodoList and an entry, should delete entry from TodoList" do
+      todo_list =
+        TodoList.new()
+        |> TodoList.add_entry(%{date: ~D[2018-12-19], title: "Dentist"})
+        |> TodoList.add_entry(%{date: ~D[2018-12-20], title: "Shopping"})
+        |> TodoList.add_entry(%{date: ~D[2018-12-19], title: "Movies"})
+
+      assert TodoList.delete_entry(todo_list, %{date: ~D[2018-12-19], title: "Dentist"}) ==
+               %TodoList{
+                 auto_id: 4,
+                 entries: %{
+                   2 => %{date: ~D[2018-12-20], id: 2, title: "Shopping"},
+                   3 => %{date: ~D[2018-12-19], id: 3, title: "Movies"}
+                 }
+               }
+    end
+  end
 end
