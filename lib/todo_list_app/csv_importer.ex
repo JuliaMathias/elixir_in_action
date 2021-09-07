@@ -13,7 +13,7 @@ defmodule ElixirInAction.TodoListApp.CsvImporter do
   end
 
   @spec process_entry(binary) :: %{date: Date.t(), title: binary}
-  def process_entry(entry) do
+  defp process_entry(entry) do
     <<year::binary-size(4), "/", month::binary-size(2), "/", day::binary-size(2), ",",
       task::binary>> = <<"#{entry}">>
 
