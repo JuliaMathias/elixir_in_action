@@ -41,6 +41,9 @@ defmodule ElixirInAction.TodoListApp.TodoList do
 
   @doc "Lists all to-do list entries"
   def entries(todo_list, date) do
+    require Inspector
+    Inspector.i()
+
     todo_list.entries
     |> Stream.filter(fn {_, entry} -> entry.date == date end)
     |> Enum.map(fn {_, entry} -> entry end)
