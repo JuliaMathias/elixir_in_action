@@ -55,7 +55,6 @@ defmodule ElixirInAction.Code.ServerProcess do
             current_state
           )
 
-        send(caller, {:response, response})
         loop(callback_module, new_state)
     end
   end
