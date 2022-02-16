@@ -1,6 +1,6 @@
 defmodule ElixirInAction.Streams do
   @moduledoc """
-  Stream exercises
+  Stream exercises.
   """
   @doc ~S"""
   function takes a file path and returns a list of numbers, with
